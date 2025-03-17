@@ -1,0 +1,147 @@
+<resources>
+    <!-- ============================= -->
+    <!-- 1) CULTURAL & HISTORICAL (1–4) -->
+    <!-- ============================= -->
+    <string name="app_name">Tokyo Guide</string>
+
+    <!-- (1) Senso-ji Temple -->
+    <string name="title_sensoji_temple">Senso-ji Temple</string>
+    <string name="description_sensoji_temple">Tokyo’s oldest and most famous Buddhist temple.</string>
+    <string name="address_sensoji_temple">2–3–1 Asakusa, Taito, Tokyo, Japan</string>
+    <string name="hours_sensoji_temple">6:00 AM - 5:00 PM</string>
+
+    <!-- (2) Meiji Shrine -->
+    <string name="title_meiji_shrine">Meiji Shrine</string>
+    <string name="description_meiji_shrine">A peaceful forest shrine dedicated to Emperor Meiji and Empress Shoken.</string>
+    <string name="address_meiji_shrine">1–1 Yoyogikamizonocho, Shibuya, Tokyo, Japan</string>
+    <string name="hours_meiji_shrine">Sunrise to Sunset</string>
+
+    <!-- (3) Edo-Tokyo Museum -->
+    <string name="title_edo_tokyo_museum">Edo-Tokyo Museum</string>
+    <string name="description_edo_tokyo_museum">Discover Tokyo’s journey from the Edo period to a modern metropolis.</string>
+    <string name="address_edo_tokyo_museum">1–4–1 Yokoami, Sumida, Tokyo, Japan</string>
+    <string name="hours_edo_tokyo_museum">9:30 AM - 5:30 PM</string>
+
+    <!-- (4) Imperial Palace & East Gardens -->
+    <string name="title_imperial_palace">Imperial Palace &amp; East Gardens</string>
+    <string name="description_imperial_palace">Historic residence of Japan’s Emperor, featuring scenic gardens.</string>
+    <string name="address_imperial_palace">1–1 Chiyoda, Chiyoda City, Tokyo, Japan</string>
+    <string name="hours_imperial_palace">9:00 AM - 4:00 PM (Gardens)</string>
+
+
+    <!-- ============================= -->
+    <!-- 2) SHOPPING & POP CULTURE (5–8) -->
+    <!-- ============================= -->
+
+    <!-- (5) Shibuya Scramble Crossing -->
+    <string name="title_shibuya_crossing">Shibuya Scramble Crossing</string>
+    <string name="description_shibuya_crossing">Experience the world’s busiest intersection in a hub of youth culture.</string>
+    <string name="address_shibuya_crossing">Shibuya, Tokyo, Japan</string>
+    <string name="hours_shibuya_crossing">24 Hours</string>
+
+    <!-- (6) Takeshita Street (Harajuku) -->
+    <string name="title_takeshita_street">Takeshita Street</string>
+    <string name="description_takeshita_street">A haven for fashion lovers, kawaii trends, and quirky shops.</string>
+    <string name="address_takeshita_street">1 Chome Jingumae, Shibuya, Tokyo, Japan</string>
+    <string name="hours_takeshita_street">Varies by store</string>
+
+    <!-- (7) Ginza Shopping District -->
+    <string name="title_ginza">Ginza Shopping District</string>
+    <string name="description_ginza">High-end luxury shopping and unique designer boutiques.</string>
+    <string name="address_ginza">Ginza, Chuo City, Tokyo, Japan</string>
+    <string name="hours_ginza">Varies by store</string>
+
+    <!-- (8) Nakano Broadway -->
+    <string name="title_nakano_broadway">Nakano Broadway</string>
+    <string name="description_nakano_broadway">A treasure trove for rare anime and manga collectibles.</string>
+    <string name="address_nakano_broadway">5 Chome-52 Nakano, Nakano City, Tokyo, Japan</string>
+    <string name="hours_nakano_broadway">11:00 AM - 8:00 PM</string>
+
+
+    <!-- ============================= -->
+    <!-- 3) TECH & FUTURISTIC (9–12) -->
+    <!-- ============================= -->
+
+    <!-- (9) Akihabara (Electric Town) -->
+    <string name="title_akihabara">Akihabara (Electric Town)</string>
+    <string name="description_akihabara">The heart of anime, manga, and gaming technology.</string>
+    <string name="address_akihabara">Sotokanda, Chiyoda City, Tokyo, Japan</string>
+    <string name="hours_akihabara">Varies by store</string>
+
+    <!-- (10) Odaiba -->
+    <string name="title_odaiba">Odaiba</string>
+    <string name="description_odaiba">A futuristic island known for a life-sized Gundam and modern attractions.</string>
+    <string name="address_odaiba">Daiba, Minato City, Tokyo, Japan</string>
+    <string name="hours_odaiba">Varies by location</string>
+
+    <!-- (11) Robot Restaurant -->
+    <string name="title_robot_restaurant">Robot Restaurant</string>
+    <string name="description_robot_restaurant">A neon-lit spectacle with robots, lasers, and energetic dancers.</string>
+    <string name="address_robot_restaurant">1–7–1 Kabukicho, Shinjuku, Tokyo, Japan</string>
+    <string name="hours_robot_restaurant">4:00 PM - 10:00 PM (Showtimes vary)</string>
+
+    <!-- (12) TeamLab Planets -->
+    <string name="title_teamlab_planets">TeamLab Planets</string>
+    <string name="description_teamlab_planets">Immerse yourself in interactive digital art installations.</string>
+    <string name="address_teamlab_planets">Toyosu, Koto, Tokyo, Japan</string>
+    <string name="hours_teamlab_planets">10:00 AM - 7:00 PM</string>
+
+
+    <!-- ============================= -->
+    <!-- 4) FOOD & CULINARY (13–16) -->
+    <!-- ============================= -->
+
+    <!-- (13) Tsukiji Outer Market -->
+    <string name="title_tsukiji_outer_market">Tsukiji Outer Market</string>
+    <string name="description_tsukiji_outer_market">Try fresh sushi, street food, and matcha desserts.</string>
+    <string name="address_tsukiji_outer_market">Tsukiji, Chuo City, Tokyo, Japan</string>
+    <string name="hours_tsukiji_outer_market">5:00 AM - 2:00 PM</string>
+
+    <!-- (14) Ramen Street (Tokyo Station) -->
+    <string name="title_ramen_street">Ramen Street (Tokyo Station)</string>
+    <string name="description_ramen_street">Sample the best ramen from different regional shops.</string>
+    <string name="address_ramen_street">1–9–1 Marunouchi, Chiyoda City, Tokyo, Japan</string>
+    <string name="hours_ramen_street">10:30 AM - 10:30 PM</string>
+
+    <!-- (15) Pompompurin Café (Harajuku) - REPLACING KAWAII MONSTER CAFE -->
+    <string name="title_pompompurin_cafe">Pompompurin Café (Harajuku)</string>
+    <string name="description_pompompurin_cafe">A Sanrio-themed café with adorable Pompompurin-inspired dishes.</string>
+    <string name="address_pompompurin_cafe">1–7–1 Jingumae, Shibuya, Tokyo, Japan</string>
+    <string name="hours_pompompurin_cafe">11:00 AM - 8:00 PM</string>
+
+    <!-- (16) Animal Cafés (Harajuku & Akihabara) -->
+    <string name="title_animal_cafes">Animal Cafés</string>
+    <string name="description_animal_cafes">Spend time with cats, owls, or hedgehogs while sipping a drink.</string>
+    <string name="address_animal_cafes">Multiple Locations, Tokyo, Japan</string>
+    <string name="hours_animal_cafes">Varies by café</string>
+
+
+    <!-- ============================= -->
+    <!-- 5) SCENIC & RELAXATION (17–20) -->
+    <!-- ============================= -->
+
+    <!-- (17) Mount Takao -->
+    <string name="title_mount_takao">Mount Takao</string>
+    <string name="description_mount_takao">A quick nature escape with scenic hiking trails.</string>
+    <string name="address_mount_takao">Hachioji, Tokyo, Japan</string>
+    <string name="hours_mount_takao">5:00 AM - 6:00 PM</string>
+
+    <!-- (18) Yoyogi Park -->
+    <string name="title_yoyogi_park">Yoyogi Park</string>
+    <string name="description_yoyogi_park">A spacious park great for picnics, jogging, and people-watching.</string>
+    <string name="address_yoyogi_park">2–1 Yoyogikamizonocho, Shibuya, Tokyo, Japan</string>
+    <string name="hours_yoyogi_park">Open 24 Hours</string>
+
+    <!-- (19) Tokyo Skytree -->
+    <string name="title_tokyo_skytree">Tokyo Skytree</string>
+    <string name="description_tokyo_skytree">Panoramic views of the city from one of the world’s tallest towers.</string>
+    <string name="address_tokyo_skytree">1–1–2 Oshiage, Sumida, Tokyo, Japan</string>
+    <string name="hours_tokyo_skytree">8:00 AM - 10:00 PM</string>
+
+    <!-- (20) Roppongi Hills Mori Tower -->
+    <string name="title_roppongi_hills">Roppongi Hills Mori Tower</string>
+    <string name="description_roppongi_hills">Enjoy a breathtaking night view of Tokyo’s skyline.</string>
+    <string name="address_roppongi_hills">6–10–1 Roppongi, Minato, Tokyo, Japan</string>
+    <string name="hours_roppongi_hills">10:00 AM - 11:00 PM</string>
+
+</resources>
