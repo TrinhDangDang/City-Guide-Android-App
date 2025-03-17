@@ -31,7 +31,6 @@ class TokyoGuideViewModel : ViewModel(){
             it.copy(
                 currentCategory = category,
                 isCategoriesScreen = false,
-                isAttractionsScreen = true,
 
                   // LocalTokyoAttractionsDataProvider.allAttractions.filter { it.category == category }
 
@@ -43,7 +42,6 @@ class TokyoGuideViewModel : ViewModel(){
         _uiState.update {
             it.copy(
                 currentAttraction = attraction,
-                isAttractionsScreen = false,
             )
         }
     }
@@ -57,7 +55,6 @@ data class TokyoGuideUiState(
     val currentAttraction: Place = LocalTokyoAttractionsDataProvider.allAttractions[0],
     val currentCategory: AttractionCategory = AttractionCategory.CULTURAL_HISTORICAL,
     val isCategoriesScreen: Boolean = true,
-    val isAttractionsScreen:Boolean = false,
 
 ){
     val currentCategoryAttractions: List<Place> by lazy {attractions[currentCategory]!!}

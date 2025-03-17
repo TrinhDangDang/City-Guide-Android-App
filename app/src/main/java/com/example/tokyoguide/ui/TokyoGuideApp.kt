@@ -28,6 +28,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -46,6 +47,7 @@ import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.tokyoguide.R
 import com.example.tokyoguide.model.AttractionCategory
@@ -65,12 +67,18 @@ fun TokyoGuideApp(
     val viewModel: TokyoGuideViewModel = viewModel()
     val tokyoGuideUiState = viewModel.uiState.collectAsState().value
 
-
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = TokyoGuideAppScreens.valueOf(
+        backStackEntry?.destination?.route ?: TokyoGuideAppScreens.CATEGORY_SCREEN.name
+    )
 
     Scaffold (
         topBar = {
             TokyoGuideAppBar(
                 tokyoGuideUiState = tokyoGuideUiState,
+                currentScreen = currentScreen,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateBack = {navController.navigateUp()}
                 )
         }
     ) { innerPadding ->
@@ -82,12 +90,11 @@ fun TokyoGuideApp(
         ) {
             composable(route = TokyoGuideAppScreens.CATEGORY_SCREEN.name) {
                 ListScreen(
+                    currentScreen = currentScreen.name,
                     tokyoGuideUiState = tokyoGuideUiState,
                     onCategorySelected = { category ->
                         viewModel.updateCurrentCategory(category)
                         navController.navigate(TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name)
-
-
                     },
                     onAttractionSelected = { selectedAttraction ->
                         viewModel.updateCurrentAttraction(
@@ -98,6 +105,7 @@ fun TokyoGuideApp(
             }
             composable(route = TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name) {
                 ListScreen(
+                    currentScreen = currentScreen.name,
                     tokyoGuideUiState = tokyoGuideUiState,
                     onCategorySelected = { category -> viewModel.updateCurrentCategory(category) },
                     onAttractionSelected = { selectedAttraction ->
@@ -163,26 +171,30 @@ fun DetailsScreen(
 @Composable
 fun TokyoGuideAppBar(
     tokyoGuideUiState: TokyoGuideUiState,
+    currentScreen: TokyoGuideAppScreens,
+    canNavigateBack: Boolean,
+    navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ){
     TopAppBar(
 
         title = { Text(
-            text = if(tokyoGuideUiState.isCategoriesScreen) "Hello"
-            else {
-                if (tokyoGuideUiState.isAttractionsScreen) {
-                    tokyoGuideUiState.currentCategory.name
-                }else{
-                    stringResource(tokyoGuideUiState.currentAttraction.title)
-                }
-            }
+            text = when (currentScreen){
+                TokyoGuideAppScreens.CATEGORY_SCREEN -> "LET'S EXPLORE TOKYO"
+                TokyoGuideAppScreens.DETAILS_SCREEN -> stringResource(tokyoGuideUiState.currentAttraction.title)
+                TokyoGuideAppScreens.ATTRACTIONS_SCREEN -> tokyoGuideUiState.currentCategory.name
+                else -> "Tokyo Guide"
+            },
+            modifier = Modifier.fillMaxWidth()
         ) },
         navigationIcon = {
-            IconButton(onClick = {}) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "Back Button"
-                )
+            if(canNavigateBack) {
+                IconButton(onClick = {navigateBack()}) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = "Back Button"
+                    )
+                }
             }
         },
         modifier = modifier
@@ -192,17 +204,18 @@ fun TokyoGuideAppBar(
 
 @Composable
 fun ListScreen(
+    currentScreen: String,
     tokyoGuideUiState: TokyoGuideUiState,
     onCategorySelected: (AttractionCategory) -> Unit,
     onAttractionSelected: (Place) -> Unit,
     modifier: Modifier = Modifier
 ){
 
-    val listToDisplay = if (tokyoGuideUiState.isCategoriesScreen) {
-        tokyoGuideUiState.attractions.keys.toList() // Show all categories
-    } else {
-        tokyoGuideUiState.currentCategoryAttractions
-    }
+ val listToDisplay  = when (currentScreen) {
+     TokyoGuideAppScreens.CATEGORY_SCREEN.name -> tokyoGuideUiState.attractions.keys.toList() // Show all categories
+     TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name -> tokyoGuideUiState.currentCategoryAttractions
+     else -> listOf("tokyo", "guide", "app")
+ }
 
         LazyColumn(
             modifier = modifier
