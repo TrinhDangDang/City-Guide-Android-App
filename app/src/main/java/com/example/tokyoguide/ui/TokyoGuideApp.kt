@@ -1,6 +1,7 @@
 package com.example.tokyoguide.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -25,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -90,22 +94,25 @@ fun TokyoGuideApp(
                 .padding(innerPadding),
         ) {
             composable(route = TokyoGuideAppScreens.CATEGORY_SCREEN.name) {
-                ListScreen(
-                    listToDisplay = tokyoGuideUiState.attractions.keys.toList(),
-                    onCategorySelected = { category ->
-                        viewModel.updateCurrentCategory(category)
-                        navController.navigate(TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name)
-                    },
-                    onAttractionSelected = { selectedAttraction ->
-                        viewModel.updateCurrentAttraction(
-                            selectedAttraction
-                        )
-                    }
-                )
+
                 if (windowSize == WindowWidthSizeClass.Expanded){
                     TokyoGuideExpandedScreen(
                         tokyoGuideUiState = tokyoGuideUiState,
                         viewModel = viewModel
+                    )
+                }
+                else{
+                    ListScreen(
+                        listToDisplay = tokyoGuideUiState.attractions.keys.toList(),
+                        onCategorySelected = { category ->
+                            viewModel.updateCurrentCategory(category)
+                            navController.navigate(TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name)
+                        },
+                        onAttractionSelected = { selectedAttraction ->
+                            viewModel.updateCurrentAttraction(
+                                selectedAttraction
+                            )
+                        }
                     )
                 }
             }
@@ -252,6 +259,7 @@ fun ListItem(
 ){
     Card (
         modifier = modifier
+            .fillMaxWidth()
             .clickable { onSelected() }
         ) {
         Row {
@@ -298,7 +306,8 @@ fun TokyoGuideExpandedScreen(
                     selectedAttraction
                 )
             },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .width(250.dp)
         )
         ListScreen(
             listToDisplay = tokyoGuideUiState.currentCategoryAttractions,
@@ -310,7 +319,8 @@ fun TokyoGuideExpandedScreen(
                     selectedAttraction
                 )
             },
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1.5f)
+                .fillMaxHeight()
         )
 
         DetailsScreen(
