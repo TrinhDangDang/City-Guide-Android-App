@@ -53,6 +53,7 @@ import com.example.tokyoguide.R
 import com.example.tokyoguide.model.AttractionCategory
 import com.example.tokyoguide.model.Place
 import com.example.tokyoguide.ui.theme.TokyoGuideTheme
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 enum class TokyoGuideAppScreens{
     CATEGORY_SCREEN,
@@ -90,8 +91,7 @@ fun TokyoGuideApp(
         ) {
             composable(route = TokyoGuideAppScreens.CATEGORY_SCREEN.name) {
                 ListScreen(
-                    currentScreen = currentScreen.name,
-                    tokyoGuideUiState = tokyoGuideUiState,
+                    listToDisplay = tokyoGuideUiState.attractions.keys.toList(),
                     onCategorySelected = { category ->
                         viewModel.updateCurrentCategory(category)
                         navController.navigate(TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name)
@@ -102,11 +102,16 @@ fun TokyoGuideApp(
                         )
                     }
                 )
+                if (windowSize == WindowWidthSizeClass.Expanded){
+                    TokyoGuideExpandedScreen(
+                        tokyoGuideUiState = tokyoGuideUiState,
+                        viewModel = viewModel
+                    )
+                }
             }
             composable(route = TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name) {
                 ListScreen(
-                    currentScreen = currentScreen.name,
-                    tokyoGuideUiState = tokyoGuideUiState,
+                    listToDisplay = tokyoGuideUiState.currentCategoryAttractions,
                     onCategorySelected = { category -> viewModel.updateCurrentCategory(category) },
                     onAttractionSelected = { selectedAttraction ->
                         viewModel.updateCurrentAttraction(
@@ -140,14 +145,19 @@ fun DetailsScreen(
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            Image(
-                painter = painterResource(tokyoGuideUiState.currentAttraction.imageResourceId),
-                contentDescription = stringResource(tokyoGuideUiState.currentAttraction.title),
+            Box(
                 modifier = Modifier
-                    .size(350.dp),
-                contentScale = ContentScale.FillWidth
-            )
-
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ){
+                Image(
+                    painter = painterResource(tokyoGuideUiState.currentAttraction.imageResourceId),
+                    contentDescription = stringResource(tokyoGuideUiState.currentAttraction.title),
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    contentScale = ContentScale.FillWidth,
+                )
+            }
                 Text(text = stringResource(tokyoGuideUiState.currentAttraction.description))
                 Card(
                     modifier = Modifier
@@ -203,21 +213,14 @@ fun TokyoGuideAppBar(
 }
 
 @Composable
-fun ListScreen(
-    currentScreen: String,
-    tokyoGuideUiState: TokyoGuideUiState,
+fun <T> ListScreen(
+    listToDisplay: List<T>,
     onCategorySelected: (AttractionCategory) -> Unit,
     onAttractionSelected: (Place) -> Unit,
     modifier: Modifier = Modifier
 ){
 
- val listToDisplay  = when (currentScreen) {
-     TokyoGuideAppScreens.CATEGORY_SCREEN.name -> tokyoGuideUiState.attractions.keys.toList() // Show all categories
-     TokyoGuideAppScreens.ATTRACTIONS_SCREEN.name -> tokyoGuideUiState.currentCategoryAttractions
-     else -> listOf("tokyo", "guide", "app")
- }
-
-        LazyColumn(
+    LazyColumn(
             modifier = modifier
                 .padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -274,6 +277,49 @@ fun ListItem(
         }
     }
 }
+
+
+@Composable
+fun TokyoGuideExpandedScreen(
+    tokyoGuideUiState: TokyoGuideUiState,
+    viewModel: TokyoGuideViewModel,
+    modifier: Modifier = Modifier
+){
+    Row (
+        modifier = modifier
+    ){
+        ListScreen(
+            listToDisplay = tokyoGuideUiState.attractions.keys.toList(),
+            onCategorySelected = { category ->
+                viewModel.updateCurrentCategory(category)
+            },
+            onAttractionSelected = { selectedAttraction ->
+                viewModel.updateCurrentAttraction(
+                    selectedAttraction
+                )
+            },
+            modifier = Modifier.weight(1f)
+        )
+        ListScreen(
+            listToDisplay = tokyoGuideUiState.currentCategoryAttractions,
+            onCategorySelected = { category ->
+                viewModel.updateCurrentCategory(category)
+            },
+            onAttractionSelected = { selectedAttraction ->
+                viewModel.updateCurrentAttraction(
+                    selectedAttraction
+                )
+            },
+            modifier = Modifier.weight(1f)
+        )
+
+        DetailsScreen(
+            tokyoGuideUiState = tokyoGuideUiState,
+            modifier = Modifier.weight(2f)
+        )
+    }
+}
+
 
 
 @Preview
